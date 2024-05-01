@@ -1,9 +1,10 @@
-﻿using Bancario.Domain.Entities;
+﻿using Bancario.Application.Interfaces;
+using Bancario.Domain.Entities;
 using Bancario.Domain.Interfaces;
 
 namespace Bancario.Application.Services
 {
-    public class MovimentacaoFinanceiraService
+    public class MovimentacaoFinanceiraService : IMovimentacaoFinanceiraService
     {
         private readonly IMovimentacaoFinanceiraRepository _repository;
 

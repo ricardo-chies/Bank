@@ -1,22 +1,24 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using System;
+using System.Linq;
 using System.Linq.Expressions;
+using System.Threading.Tasks;
 using Bancario.Domain.Interfaces;
 
 namespace Bancario.Infrastructure.Repositories
 {
-    public class RepositoryBase<T> : IRepositoryBase<T> where T : class
+    public class RepositoryBase<T> : IRepositoryBase<T>, IDisposable where T : class
     {
-        protected DataBaseContext _context;
+        protected readonly DataBaseContext _context;
 
         public RepositoryBase(DataBaseContext context)
         {
             _context = context;
         }
 
-        public IQueryable<T> Get()
+        public async Task<IQueryable<T>> GetAll()
         {
-            return _context.Set<T>().AsNoTracking();
+            return await Task.FromResult(_context.Set<T>().AsNoTracking());
         }
 
         public async Task<T> GetById(Expression<Func<T, bool>> predicate)
@@ -24,20 +26,28 @@ namespace Bancario.Infrastructure.Repositories
             return await _context.Set<T>().SingleOrDefaultAsync(predicate);
         }
 
-        public void Add(T entity)
+        public async Task<bool> Add(T entity)
         {
-            _context.Set<T>().Add(entity);
+            await _context.Set<T>().AddAsync(entity);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public void Update(T entity)
+        public async Task<bool> Update(T entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
             _context.Set<T>().Update(entity);
+            return await _context.SaveChangesAsync() > 0;
         }
 
-        public void Delete(T entity)
+        public async Task<bool> Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
+            return await _context.SaveChangesAsync() > 0;
+        }
+
+        public void Dispose()
+        {
+            _context.Dispose();
         }
     }
 }

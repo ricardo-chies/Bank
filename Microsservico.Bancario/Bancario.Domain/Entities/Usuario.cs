@@ -1,19 +1,18 @@
-﻿namespace Bancario.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Bancario.Domain.Entities
 {
+    [Table("Usuario")]
     public class Usuario
     {
-        public int Id { get; set; }
-        public string Nome { get; set; }
+        [Key]
+        public int IdUsuario { get; set; }
+        public string NomeCompleto { get; set; }
         public string CPF { get; set; }
         public string Email { get; set; }
         public string Senha { get; set; }
-        public TipoUsuario Tipo { get; set; }
-    }
-
-    public enum TipoUsuario
-    {
-        Cliente,
-        Gerente
+        public int IdTipoUsuario { get; set; }
     }
 
 }

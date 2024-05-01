@@ -4,10 +4,10 @@ namespace Bancario.Domain.Interfaces
 {
     public interface IRepositoryBase<T>
     {
-        IQueryable<T> Get();
+        Task<IQueryable<T>> GetAll();
         Task<T> GetById(Expression<Func<T, bool>> predicate);
-        void Add(T entity);
-        void Update(T entity);
-        void Delete(T entity);
+        Task<bool> Add(T entity);
+        Task<bool> Update(T entity);
+        Task<bool> Delete(T entity);
     }
 }

@@ -1,20 +1,40 @@
-﻿using Bancario.Domain.Entities;
+﻿using AutoMapper;
+using Bancario.Application.Dtos;
+using Bancario.Application.Interfaces;
+using Bancario.Domain.Entities;
 using Bancario.Domain.Interfaces;
 
 namespace Bancario.Application.Services
 {
-    public class UsuarioService
+    public class UsuarioService : IUsuarioService
     {
-        private readonly IUsuarioRepository _repository;
+        private readonly IUsuarioRepository _usuarioRepository;
+        private readonly IMapper _mapper;
 
-        public UsuarioService(IUsuarioRepository repository)
+        public UsuarioService(IUsuarioRepository usuarioRepository, IMapper mapper)
         {
-            _repository = repository;
+            _usuarioRepository = usuarioRepository;
+            _mapper = mapper;
         }
 
-        public Usuario BuscarPorId(int id)
+        public async Task<bool> CriarUsuario(UsuarioDto usuarioDto)
         {
-            return null;
+            Usuario usuario = await _usuarioRepository.GetCpf(usuarioDto.cpf);
+
+            if (usuario != null)
+            {
+                throw new InvalidOperationException("Este CPF já possui cadastro.");
+            }
+
+            usuario = _mapper.Map<UsuarioDto, Usuario>(usuarioDto);
+
+            return await _usuarioRepository.Add(usuario);
+        }
+
+        public async Task<UsuarioDto> ObterUsuarioPorCpf(string cpf)
+        {
+            Usuario usuario = await _usuarioRepository.GetCpf(cpf);
+            return _mapper.Map<Usuario, UsuarioDto>(usuario);
         }
     }
 }
