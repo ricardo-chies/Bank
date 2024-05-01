@@ -1,16 +1,15 @@
-﻿namespace Bancario.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Bancario.Domain.Entities
 {
+    [Table("Conta_Bancaria")]
     public class ContaBancaria
     {
-        public int Id { get; set; }
-        public int IdCliente { get; set; }
+        [Key]
+        public int IdConta { get; set; }
+        public required string CPF { get; set; }
         public decimal Saldo { get; set; }
-        public StatusConta Status { get; set; }
-    }
-
-    public enum StatusConta
-    {
-        Ativa,
-        Inativa
+        public required string Status { get; set; }
     }
 }

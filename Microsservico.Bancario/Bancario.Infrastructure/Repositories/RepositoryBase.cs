@@ -32,11 +32,23 @@ namespace Bancario.Infrastructure.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Update(T entity)
+        //public async Task<bool> Update(T entity)
+        //{
+        //    _context.Entry(entity).State = EntityState.Modified;
+        //    _context.Set<T>().Update(entity);
+        //    return await _context.SaveChangesAsync() > 0;
+        //}
+
+        public async Task<bool> Update(T entity, Expression<Func<T, object>> keySelector)
         {
-            _context.Entry(entity).State = EntityState.Modified;
-            _context.Set<T>().Update(entity);
-            return await _context.SaveChangesAsync() > 0;
+            var key = keySelector.Compile()(entity);
+            var existingEntity = await _context.Set<T>().FindAsync(key);
+            if (existingEntity != null)
+            {
+                _context.Entry(existingEntity).CurrentValues.SetValues(entity);
+                return await _context.SaveChangesAsync() > 0;
+            }
+            return false;
         }
 
         public async Task<bool> Delete(T entity)

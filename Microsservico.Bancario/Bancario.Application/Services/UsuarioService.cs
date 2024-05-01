@@ -19,7 +19,7 @@ namespace Bancario.Application.Services
 
         public async Task<bool> CriarUsuario(UsuarioDto usuarioDto)
         {
-            Usuario usuario = await _usuarioRepository.GetCpf(usuarioDto.cpf);
+            Usuario usuario = await _usuarioRepository.GetCpf(usuarioDto.Cpf);
 
             if (usuario != null)
             {

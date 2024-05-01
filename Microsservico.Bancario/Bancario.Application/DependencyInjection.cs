@@ -14,6 +14,8 @@ namespace Bancario.Application
             var mappingConfig = new MapperConfiguration(mc =>
             {
                 mc.AddProfile(new UsuarioProfile());
+                mc.AddProfile(new ContaBancariaProfile());
+                mc.AddProfile(new MovimentacaoFinanceiraProfile());
             });
 
             IMapper mapper = mappingConfig.CreateMapper();

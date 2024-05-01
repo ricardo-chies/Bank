@@ -4,5 +4,6 @@ namespace Bancario.Domain.Interfaces
 {
     public interface IMovimentacaoFinanceiraRepository : IRepositoryBase<MovimentacaoFinanceira>
     {
+
     }
 }

@@ -7,11 +7,10 @@ namespace Bancario.Domain.Entities
     public class Usuario
     {
         [Key]
-        public int IdUsuario { get; set; }
-        public string NomeCompleto { get; set; }
-        public string CPF { get; set; }
-        public string Email { get; set; }
-        public string Senha { get; set; }
+        public required string CPF { get; set; }
+        public required string NomeCompleto { get; set; }
+        public required string Email { get; set; }
+        public required string Senha { get; set; }
         public int IdTipoUsuario { get; set; }
     }
 

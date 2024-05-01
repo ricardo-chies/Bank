@@ -7,7 +7,7 @@ namespace Bancario.Domain.Interfaces
         Task<IQueryable<T>> GetAll();
         Task<T> GetById(Expression<Func<T, bool>> predicate);
         Task<bool> Add(T entity);
-        Task<bool> Update(T entity);
+        Task<bool> Update(T entity, Expression<Func<T, object>> keySelector);
         Task<bool> Delete(T entity);
     }
 }

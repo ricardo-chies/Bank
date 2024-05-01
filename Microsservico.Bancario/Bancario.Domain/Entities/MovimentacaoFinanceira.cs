@@ -1,18 +1,16 @@
-﻿namespace Bancario.Domain.Entities
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Bancario.Domain.Entities
 {
+    [Table("Movimentacao_Financeira")]
     public class MovimentacaoFinanceira
     {
-        public int Id { get; set; }
+        [Key]
+        public int IdMovimentacao { get; set; }
         public int IdConta { get; set; }
-        public TipoMovimentacao Tipo { get; set; }
         public decimal Valor { get; set; }
         public DateTime DataMovimentacao { get; set; }
-        public string Descricao { get; set; }
-    }
-
-    public enum TipoMovimentacao
-    {
-        Credito,
-        Debito
+        public string? Descricao { get; set; }
     }
 }
