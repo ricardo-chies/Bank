@@ -39,3 +39,4 @@
 *.pidb
 *.svclog
 *.scc
+/Microsservico.Bancario/Bancario.API/bin/Debug/net8.0
