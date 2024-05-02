@@ -21,18 +21,27 @@ namespace Bancario.Application.Services
 
         public async Task<bool> CriarMovimentacao(MovimentacaoFinanceiraDto movimentacaoDto)
         {
-            ContaBancariaDto contaDto = await _contaService.ObterContaPorId(movimentacaoDto.Conta);
+            ContaBancariaDto contaOrigemDto = await _contaService.ObterContaPorId(movimentacaoDto.ContaOrigem);
 
-            if (contaDto.Saldo < movimentacaoDto.Valor)
+            if (contaOrigemDto.Saldo < movimentacaoDto.Valor)
             {
                 throw new InvalidOperationException("Não autorizado.");
             }
 
+            ContaBancariaDto contaDestinoDto = await _contaService.ObterContaPorId(movimentacaoDto.ContaDestino);
+
+            contaOrigemDto.Saldo -= movimentacaoDto.Valor;
+            contaDestinoDto.Saldo += movimentacaoDto.Valor;
+
+            List<ContaBancariaDto> listContasDto = new List<ContaBancariaDto>
+            {
+                { contaOrigemDto },
+                { contaDestinoDto }
+            };
+
             MovimentacaoFinanceira movimentacao = _mapper.Map<MovimentacaoFinanceiraDto, MovimentacaoFinanceira>(movimentacaoDto);
 
-            contaDto.Saldo -= movimentacaoDto.Valor;
-
-            bool resultMovimentacao = await _contaService.AtualizarConta(contaDto);
+            bool resultMovimentacao = await _contaService.AtualizarContas(listContasDto);
 
             if (resultMovimentacao)
             {
@@ -40,6 +49,12 @@ namespace Bancario.Application.Services
             }
 
             return resultMovimentacao;
+        }
+
+        public async Task<MovimentacaoFinanceiraDto> ObterMovimentacoes(int idConta)
+        {
+            MovimentacaoFinanceira movimentacao = await _movimentacaoRepository.GetById(c => c.IdContaOrigem == idConta);
+            return _mapper.Map<MovimentacaoFinanceira, MovimentacaoFinanceiraDto>(movimentacao);
         }
     }
 }

@@ -8,7 +8,8 @@ namespace Bancario.Domain.Entities
     {
         [Key]
         public int IdMovimentacao { get; set; }
-        public int IdConta { get; set; }
+        public int IdContaOrigem { get; set; }
+        public int IdContaDestino { get; set; }
         public decimal Valor { get; set; }
         public DateTime DataMovimentacao { get; set; }
         public string? Descricao { get; set; }

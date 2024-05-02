@@ -5,6 +5,6 @@ namespace Bancario.Application.Interfaces
     public interface IContaBancariaService
     {
         Task<ContaBancariaDto> ObterContaPorId(int idConta);
-        Task<bool> AtualizarConta(ContaBancariaDto contaDto);
+        Task<bool> AtualizarContas(List<ContaBancariaDto> listContaDto);
     }
 }

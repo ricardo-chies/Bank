@@ -5,5 +5,6 @@ namespace Bancario.Application.Interfaces
     public interface IMovimentacaoFinanceiraService
     {
         Task<bool> CriarMovimentacao(MovimentacaoFinanceiraDto movimentacaoDto);
+        Task<MovimentacaoFinanceiraDto> ObterMovimentacoes(int idConta);
     }
 }

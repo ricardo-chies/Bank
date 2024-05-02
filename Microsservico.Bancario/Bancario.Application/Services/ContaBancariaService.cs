@@ -20,13 +20,20 @@ namespace Bancario.Application.Services
         public async Task<ContaBancariaDto> ObterContaPorId(int idConta)
         {
             ContaBancaria conta = await _contaRepository.GetById(c => c.IdConta == idConta);
-            return _mapper.Map<ContaBancaria, ContaBancariaDto>(conta); ;
-        }        
-        
-        public async Task<bool> AtualizarConta(ContaBancariaDto contaDto)
+            return _mapper.Map<ContaBancaria, ContaBancariaDto>(conta);
+        }
+
+        public async Task<bool> AtualizarContas(List<ContaBancariaDto> listContaDto)
         {
-            ContaBancaria conta = _mapper.Map<ContaBancariaDto, ContaBancaria>(contaDto);
-            return await _contaRepository.Update(conta, c => c.IdConta);
+            List<ContaBancaria> listConta = _mapper.Map<List<ContaBancariaDto>, List<ContaBancaria>>(listContaDto);
+            bool result = false;
+
+            foreach (var conta in listConta)
+            {
+                result = await _contaRepository.Update(conta, c => c.IdConta);
+            }
+
+            return result;
         }
     }
 }

@@ -32,13 +32,6 @@ namespace Bancario.Infrastructure.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        //public async Task<bool> Update(T entity)
-        //{
-        //    _context.Entry(entity).State = EntityState.Modified;
-        //    _context.Set<T>().Update(entity);
-        //    return await _context.SaveChangesAsync() > 0;
-        //}
-
         public async Task<bool> Update(T entity, Expression<Func<T, object>> keySelector)
         {
             var key = keySelector.Compile()(entity);

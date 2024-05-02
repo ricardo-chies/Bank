@@ -28,11 +28,19 @@ namespace Bancario.API.Controllers
             return Ok(resultado);
         }
 
-        [HttpPost]
+        [HttpPost("movimentacoes")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         public async Task<IActionResult> CriarMovimentacao([FromBody] MovimentacaoFinanceiraDto movimentacaoDto)
         {
             var resultado = await _movimentacaoService.CriarMovimentacao(movimentacaoDto);
+            return Ok(resultado);
+        }
+
+        [HttpGet("{conta}/movimentacoes")]
+        [ProducesResponseType(typeof(IEnumerable<MovimentacaoFinanceiraDto>), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ObterMovimentacoes([FromRoute] int conta)
+        {
+            var resultado = await _movimentacaoService.ObterMovimentacoes(conta);
             return Ok(resultado);
         }
     }
