@@ -16,7 +16,7 @@ namespace Bancario.Infrastructure.Repositories
             _context = context;
         }
 
-        public async Task<IQueryable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll()
         {
             return await Task.FromResult(_context.Set<T>().AsNoTracking());
         }
@@ -44,8 +44,14 @@ namespace Bancario.Infrastructure.Repositories
             return false;
         }
 
-        public async Task<bool> Delete(T entity)
+        public async Task<bool> Delete(Expression<Func<T, bool>> predicate)
         {
+            var entity = await _context.Set<T>().SingleOrDefaultAsync(predicate);
+            if (entity == null)
+            {
+                return false;
+            }
+
             _context.Set<T>().Remove(entity);
             return await _context.SaveChangesAsync() > 0;
         }

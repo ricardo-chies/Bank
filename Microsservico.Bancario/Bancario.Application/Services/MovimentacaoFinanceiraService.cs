@@ -51,10 +51,10 @@ namespace Bancario.Application.Services
             return resultMovimentacao;
         }
 
-        public async Task<MovimentacaoFinanceiraDto> ObterMovimentacoes(int idConta)
+        public async Task<IEnumerable<MovimentacaoFinanceiraDto>> ObterMovimentacoes(int idConta)
         {
-            MovimentacaoFinanceira movimentacao = await _movimentacaoRepository.GetById(c => c.IdContaOrigem == idConta);
-            return _mapper.Map<MovimentacaoFinanceira, MovimentacaoFinanceiraDto>(movimentacao);
+            List<MovimentacaoFinanceira> listMovimentacao = await _movimentacaoRepository.ObterMovimentacoesConta(idConta);
+            return _mapper.Map<List<MovimentacaoFinanceira>, List<MovimentacaoFinanceiraDto>>(listMovimentacao);
         }
     }
 }

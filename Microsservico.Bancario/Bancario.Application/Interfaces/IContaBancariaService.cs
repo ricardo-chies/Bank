@@ -6,5 +6,10 @@ namespace Bancario.Application.Interfaces
     {
         Task<ContaBancariaDto> ObterContaPorId(int idConta);
         Task<bool> AtualizarContas(List<ContaBancariaDto> listContaDto);
+        Task<bool> ExcluirContaBancaria(int idConta);
+        Task<bool> CriarContaBancaria(ContaBancariaDto contaDto);
+        Task<IEnumerable<MovimentacaoFinanceiraDto>> ObterExtratoPorPeriodo(int conta, DateTime dataInicio, DateTime dataFim);
+        Task<IEnumerable<MovimentacaoFinanceiraDto>> ObterExtratoPorConta(int conta);
+        Task<IEnumerable<ContaBancariaDto>> ObterSaldoClientes();
     }
 }

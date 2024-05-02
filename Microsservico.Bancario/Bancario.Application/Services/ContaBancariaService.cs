@@ -23,6 +23,18 @@ namespace Bancario.Application.Services
             return _mapper.Map<ContaBancaria, ContaBancariaDto>(conta);
         }
 
+        public async Task<bool> CriarContaBancaria(ContaBancariaDto contaDto)
+        {
+            ContaBancaria conta = _mapper.Map<ContaBancariaDto, ContaBancaria>(contaDto);
+            return await _contaRepository.Add(conta);
+        }
+
+        public async Task<IEnumerable<ContaBancariaDto>> ObterSaldoClientes()
+        {
+            var listConta = await _contaRepository.GetAll();
+            return _mapper.Map<IEnumerable<ContaBancaria>, IEnumerable<ContaBancariaDto>>(listConta);
+        }
+
         public async Task<bool> AtualizarContas(List<ContaBancariaDto> listContaDto)
         {
             List<ContaBancaria> listConta = _mapper.Map<List<ContaBancariaDto>, List<ContaBancaria>>(listContaDto);
@@ -34,6 +46,23 @@ namespace Bancario.Application.Services
             }
 
             return result;
+        }
+
+        public async Task<IEnumerable<MovimentacaoFinanceiraDto>> ObterExtratoPorPeriodo(int idConta, DateTime dataInicio, DateTime dataFim)
+        {
+            List<MovimentacaoFinanceira> listMovimentacao = await _contaRepository.ObterExtratoPorPeriodo(idConta, dataInicio, dataFim);
+            return _mapper.Map<List<MovimentacaoFinanceira>, List<MovimentacaoFinanceiraDto>>(listMovimentacao);
+        }        
+        
+        public async Task<IEnumerable<MovimentacaoFinanceiraDto>> ObterExtratoPorConta(int idConta)
+        {
+            List<MovimentacaoFinanceira> listMovimentacao = await _contaRepository.ObterExtratoPorConta(idConta);
+            return _mapper.Map<List<MovimentacaoFinanceira>, List<MovimentacaoFinanceiraDto>>(listMovimentacao);
+        }
+
+        public async Task<bool> ExcluirContaBancaria(int idConta)
+        {
+            return await _contaRepository.Delete(c => c.IdConta == idConta);
         }
     }
 }
