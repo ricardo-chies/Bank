@@ -82,5 +82,13 @@ namespace Bancario.API.Controllers
             var resultado = await _contaService.ExcluirContaBancaria(conta);
             return Ok(resultado);
         }
+
+        [HttpPut("inativa")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        public async Task<IActionResult> InativarContaBancaria([FromBody] List<ContaBancariaDto> contaDto)
+        {
+            var resultado = await _contaService.AtualizarContas(contaDto);
+            return Ok(resultado);
+        }
     }
 }

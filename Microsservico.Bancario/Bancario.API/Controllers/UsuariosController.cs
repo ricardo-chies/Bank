@@ -32,5 +32,13 @@ namespace Bancario.API.Controllers
             var usuario = await _service.ObterUsuarioPorCpf(cpf);
             return Ok(usuario);
         }
+
+        [HttpGet("login")]
+        [ProducesResponseType(typeof(UsuarioDto), StatusCodes.Status200OK)]
+        public async Task<IActionResult> LoginUsuario([FromQuery] string cpf, string senha)
+        {
+            var resultado = await _service.LoginUsuario(cpf, senha);
+            return Ok(resultado);
+        }
     }
 }

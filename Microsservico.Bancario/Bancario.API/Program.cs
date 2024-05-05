@@ -4,8 +4,8 @@ using Bancario.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+// Adiciona serviços ao contêiner.
+// Aprenda mais sobre a configuração do Swagger/OpenAPI em https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -22,19 +22,32 @@ builder.Services.AddSwaggerGen(c =>
         },
         Title = "Bancario",
         Version = "v1"
-    }); ;
+    });
 });
 
-// Dependencias da Aplicação
+// Adiciona a configuração CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularApp", builder =>
+    {
+        builder.WithOrigins("http://localhost:4200")
+               .AllowAnyMethod()
+               .AllowAnyHeader();
+    });
+});
+
+// Dependências da Aplicação
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// Configura o pipeline de requisição
 app.UseSwagger();
 app.UseSwaggerUI();
+
+// Adiciona o middleware CORS
+app.UseCors("AllowAngularApp");
 
 app.UseHttpsRedirection();
 app.MapControllers();

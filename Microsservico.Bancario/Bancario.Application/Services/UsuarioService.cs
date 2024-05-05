@@ -36,5 +36,11 @@ namespace Bancario.Application.Services
             Usuario usuario = await _usuarioRepository.GetCpf(cpf);
             return _mapper.Map<Usuario, UsuarioDto>(usuario);
         }
+
+        public async Task<UsuarioDto> LoginUsuario(string cpf, string senha)
+        {
+            Usuario usuario = await _usuarioRepository.GetLogin(cpf, senha);
+            return _mapper.Map<Usuario, UsuarioDto>(usuario);
+        }
     }
 }

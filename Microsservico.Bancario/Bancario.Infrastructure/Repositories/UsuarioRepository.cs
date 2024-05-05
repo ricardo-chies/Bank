@@ -17,5 +17,13 @@ namespace Bancario.Infrastructure.Repositories
             Expression<Func<Usuario, bool>> predicate = x => x.CPF == cpf;
             return await _context.Set<Usuario>().SingleOrDefaultAsync(predicate);
         }
+
+        public async Task<Usuario> GetLogin(string cpf, string senha)
+        {
+            var usuario = await _context.Set<Usuario>()
+                                         .SingleOrDefaultAsync(x => x.CPF == cpf && x.Senha == senha);
+            return usuario;
+        }
+
     }
 }

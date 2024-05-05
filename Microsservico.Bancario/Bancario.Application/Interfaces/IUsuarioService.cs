@@ -6,5 +6,6 @@ namespace Bancario.Application.Interfaces
     {
         Task<bool> CriarUsuario(UsuarioDto usuarioDto);
         Task<UsuarioDto> ObterUsuarioPorCpf(string cpf);
+        Task<UsuarioDto> LoginUsuario(string cpf, string senha);
     }
 }
