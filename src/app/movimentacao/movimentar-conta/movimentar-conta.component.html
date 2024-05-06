@@ -1,0 +1,35 @@
+<div class="container">
+  <div class="movimentar-conta-container" *ngIf="!movimentacaoConcluida">
+    <h2>Movimentar Conta</h2>
+    <div class="p-field input-container" *ngIf="codigoTipoUsuario !== 2">
+      <label for="contaOrigem" class="p-col-fixed">Conta Origem:</label>
+      <input type="number" id="contaOrigem" name="contaOrigem" [(ngModel)]="movimentacao.contaOrigem" pInputNumber class="p-col">
+    </div>      
+    <div class="p-field input-container">
+      <label for="contaDestino" class="p-col-fixed">Conta Destino:</label>
+      <input type="number" id="contaDestino" name="contaDestino" [(ngModel)]="movimentacao.contaDestino" pInputNumber class="p-col">
+    </div>
+    <div class="p-field input-container">
+      <label for="valor" class="p-col-fixed">Valor:</label>
+      <input type="number" id="valor" name="valor" [(ngModel)]="movimentacao.valor" pInputNumber class="p-col">
+    </div>
+    <div class="p-field input-container">
+      <label for="descricao" class="p-col-fixed">Descrição:</label>
+      <input type="text" id="descricao" name="descricao" [(ngModel)]="movimentacao.descricao" pInputText class="p-col">
+    </div>
+    <button class="p-button btn-realizar-movimentacao" type="button" (click)="realizarMovimentacao()" pButton>Realizar Movimentação</button>
+  </div>
+
+  <div class="movimentacao-concluida-container" *ngIf="movimentacaoConcluida">
+    <h3 *ngIf="erroMovimentacao; else sucessoMsg" class="erro-msg">{{ erroMovimentacao }}</h3>
+    <ng-template #sucessoMsg>
+      <h3 class="sucesso-msg">Movimentação concluída com sucesso!</h3>
+    </ng-template>
+    <div class="button-container">
+      <button class="p-button btn-voltar" type="button" (click)="voltar()" pButton>Voltar</button>
+    </div>
+    <div class="button-container">
+      <button class="p-button btn-nova-movimentacao" type="button" (click)="novaMovimentacao()" pButton>Nova Movimentação</button>
+    </div>
+  </div>
+</div>

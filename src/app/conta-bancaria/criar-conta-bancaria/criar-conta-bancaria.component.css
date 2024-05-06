@@ -1,0 +1,56 @@
+.conta-container,
+.conta-concluida-container {
+    text-align: center;
+    margin-top: 20px;
+    align-items: center;
+}
+
+.input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 300px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+  
+  .input-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+  }
+  
+  .input-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+.btn-abrir-conta,
+.btn-voltar,
+.btn-nova-conta {
+    padding: 10px 20px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.btn-abrir-conta:hover,
+.btn-voltar:hover,
+.btn-nova-conta:hover {
+    background-color: #0056b3;
+}
+
+.erro-msg {
+    color: red;
+}
+
+.sucesso-msg {
+    color: green;
+}

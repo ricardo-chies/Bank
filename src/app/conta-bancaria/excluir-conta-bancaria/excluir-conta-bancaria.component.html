@@ -1,0 +1,23 @@
+<div class="container">
+    <h2>Excluir Conta Bancária</h2>
+    <div class="input-container">
+        <label for="numeroConta">Número da Conta:</label>
+        <input id="numeroConta" type="text" [(ngModel)]="numeroConta" pInputText>
+        <button (click)="verificarConta()" pButton>Verificar Conta</button>
+    </div>
+    <div *ngIf="mensagemVerificacao && !mostrarMensagemRetorno" class="mensagem-container">
+        <p>{{ mensagemVerificacao }}</p>
+        <button *ngIf="mensagemVerificacao === 'Foi encontrado registro de movimentações, deseja inativar a conta?'" (click)="inativarConta()" pButton>Inativar</button>
+        <button *ngIf="mensagemExclusao === 'Nenhuma movimentação encontrada, deseja excluir a conta ?' || mensagemVerificacao === 'Nenhuma movimentação encontrada, deseja excluir a conta ?'" (click)="excluirConta()" pButton>Excluir</button>
+        <button *ngIf="mensagemVerificacao || mensagemExclusao || mensagemInativacao" (click)="voltar()" pButton>Voltar</button>
+    </div>
+    <div *ngIf="mensagemInativacao && mostrarMensagemRetorno" class="mensagem-container">
+        <p>{{ mensagemInativacao }}</p>
+        <button (click)="voltar()" pButton>Voltar</button>
+    </div>
+    <div *ngIf="mensagemExclusao && !mensagemInativacao && mostrarMensagemRetorno" class="mensagem-container">
+        <p>{{ mensagemExclusao }}</p>
+        <button *ngIf="mensagemExclusao === 'Nenhuma movimentação encontrada, deseja excluir a conta ?'" (click)="excluirConta()" pButton>Excluir</button>
+        <button *ngIf="mensagemExclusao === 'Conta excluída com sucesso.'" (click)="voltar()" pButton>Voltar</button>
+    </div>
+</div>

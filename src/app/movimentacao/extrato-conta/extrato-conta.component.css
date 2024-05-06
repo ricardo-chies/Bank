@@ -1,0 +1,25 @@
+.container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.input-container {
+  margin-bottom: 10px;
+}
+
+button {
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+.p-datatable th,
+.p-datatable td {
+  padding: 10px;
+  text-align: center;
+  background-color: white;
+}
+
+.p-datatable th {
+  background-color: #007bff;
+  color: #fff;
+}

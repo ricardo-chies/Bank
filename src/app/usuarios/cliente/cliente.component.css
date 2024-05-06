@@ -1,0 +1,27 @@
+.container {
+    text-align: center;
+  }
+  
+  .fa-eye-slash {
+    cursor: pointer;
+    margin-left: 5px;
+  }
+  
+  .fa-eye-slash:hover {
+    color: blue;
+  }
+  
+  button {
+    margin-top: 10px;
+    margin-right: 10px;
+    border-radius: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  

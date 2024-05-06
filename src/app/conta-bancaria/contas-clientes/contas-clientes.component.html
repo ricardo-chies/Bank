@@ -1,0 +1,23 @@
+<div class="container">
+    <h2 style="text-align: center;">Clientes e Saldos</h2>
+    <div class="table-container p-shadow-2">
+        <p-table [value]="clientes" [style]="{'width': '100%'}">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th style="background-color: #007bff; color: #fff;">Conta</th>
+                    <th style="background-color: #007bff; color: #fff;">CPF</th>
+                    <th style="background-color: #007bff; color: #fff;">Saldo</th>
+                    <th style="background-color: #007bff; color: #fff;">Status</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-cliente>
+                <tr>
+                    <td>{{ cliente.conta }}</td>
+                    <td>{{ cliente.cpf }}</td>
+                    <td>R$ {{ cliente.saldo }}</td>
+                    <td>{{ cliente.status === 'A' ? 'Ativo' : (cliente.status === 'I' ? 'Inativo' : cliente.status) }}</td> <!-- Condição para exibir "Ativo" ou "Inativo" -->
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

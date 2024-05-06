@@ -1,0 +1,37 @@
+<div class="container">
+  <h2>Buscar Extrato</h2>
+  <div class="input-container">
+    <label>Data de Início:</label>
+    <input type="date" [(ngModel)]="dataInicio">
+  </div>
+  <div class="input-container">
+    <label>Data de Fim:</label>
+    <input type="date" [(ngModel)]="dataFim">
+  </div>
+  <button pButton type="button" label="Buscar" icon="pi pi-search" (click)="buscarExtrato()"></button>
+</div>
+
+<div *ngIf="movimentacoes && movimentacoes.length > 0" class="table-container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Código Movimentação</th>
+        <th>Conta Origem</th>
+        <th>Conta Destino</th>
+        <th>Valor</th>
+        <th>Data Movimentação</th>
+        <th>Descrição</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let movimentacao of movimentacoes">
+        <td>{{ movimentacao.codigoMovimentacao }}</td>
+        <td [ngClass]="{'red': conta === movimentacao.contaOrigem, 'green': conta === movimentacao.contaDestino}">{{ movimentacao.contaOrigem }}</td>
+        <td [ngClass]="{'red': conta === movimentacao.contaOrigem, 'green': conta === movimentacao.contaDestino}">{{ movimentacao.contaDestino }}</td>
+        <td [ngClass]="{'red': conta === movimentacao.contaOrigem, 'green': conta === movimentacao.contaDestino}">{{ movimentacao.valor | currency }}</td>
+        <td>{{ movimentacao.dataMovimentacao | date: 'dd/MM/yyyy' }}</td>
+        <td>{{ movimentacao.descricao }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

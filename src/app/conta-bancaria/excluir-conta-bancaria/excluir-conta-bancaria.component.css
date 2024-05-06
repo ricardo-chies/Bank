@@ -1,0 +1,38 @@
+.container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.input-container {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    max-width: 300px;
+    margin: 0 auto;
+}  
+  .input-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 1rem;
+  }
+  
+  .input-container input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+  }
+
+.mensagem-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.mensagem-container button {
+    margin-top: 20px;
+    margin-bottom: 15px;
+}

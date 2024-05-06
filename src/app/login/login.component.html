@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="login-header">
+    <img src="../../assets/Logo.png" alt="Logo do Banco" class="logo">
+  </div>
+  
+  <form name="loginForm" class="login-form" (ngSubmit)="login()">
+    <h2 class="form-title">Login</h2>
+    
+    <div class="input-container">
+      <input type="text" pInputText placeholder="CPF" [(ngModel)]="cpf" [ngModelOptions]="{ standalone: true }">
+    </div>
+    
+    <div class="input-container">
+      <input type="password" pPassword placeholder="Senha" [(ngModel)]="senha" name="senha">
+    </div>
+    
+    <button type="submit" pButton class="btn-login" label="Entrar"></button>
+  </form>      
+</div>

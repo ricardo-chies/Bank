@@ -1,0 +1,31 @@
+<div class="container">
+    <h2>Movimentações Financeiras</h2>
+    <div class="table-container">
+      <p-table [value]="movimentacoes" *ngIf="movimentacoes.length > 0" [style]="{ 'width': '100%' }" class="p-datatable">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th>Código Movimentação</th>
+                  <th>Conta Origem</th>
+                  <th>Conta Destino</th>
+                  <th>Valor</th>
+                  <th>Data Movimentação</th>
+                  <th>Descrição</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-movimentacao>
+              <tr>
+                  <td>{{ movimentacao.codigoMovimentacao }}</td>
+                  <td>{{ movimentacao.contaOrigem }}</td>
+                  <td>{{ movimentacao.contaDestino }}</td>
+                  <td>{{ movimentacao.valor }}</td>
+                  <td>{{ movimentacao.dataMovimentacao | date: 'dd/MM/yyyy' }}</td>
+                  <td>{{ movimentacao.descricao }}</td>
+              </tr>
+          </ng-template>
+      </p-table>
+    </div>
+    <div *ngIf="movimentacoes.length === 0" class="alert alert-info">
+        Não há movimentações para exibir.
+    </div>
+  </div>
+  

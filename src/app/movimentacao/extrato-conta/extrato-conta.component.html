@@ -1,0 +1,36 @@
+<div class="container">
+    <h2>Buscar Extrato</h2>
+    <div class="p-grid input-container">
+        <div class="p-col">
+            <label for="conta">Conta: </label>
+            <input type="number" [(ngModel)]="conta" id="conta" class="p-inputtext">
+        </div>
+    </div>
+    <button pButton type="button" label="Buscar" icon="pi pi-search" (click)="buscarExtratoConta()" class="p-button-rounded"></button>
+</div>
+  
+<div *ngIf="movimentacoes && movimentacoes.length > 0" class="container">
+    <h2>Extrato</h2>
+    <p-table [value]="movimentacoes" [style]="{ 'margin': '0 auto', 'max-width': '1000px' }" class="p-datatable">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Código Movimentação</th>
+                <th>Conta Origem</th>
+                <th>Conta Destino</th>
+                <th>Valor</th>
+                <th>Data Movimentação</th>
+                <th>Descrição</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-movimentacao>
+            <tr>
+                <td>{{ movimentacao.codigoMovimentacao }}</td>
+                <td>{{ movimentacao.contaOrigem }}</td>
+                <td>{{ movimentacao.contaDestino }}</td>
+                <td>R$ {{ movimentacao.valor}}</td>
+                <td>{{ movimentacao.dataMovimentacao | date: 'dd/MM/yyyy' }}</td>
+                <td>{{ movimentacao.descricao }}</td>
+            </tr>
+        </ng-template>
+    </p-table>
+</div>

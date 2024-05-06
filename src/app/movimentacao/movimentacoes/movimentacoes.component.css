@@ -1,0 +1,35 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  margin: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+.p-datatable {
+  width: calc(100% - 40px);
+  margin-top: 20px;
+}
+
+.p-datatable th, .p-datatable td {
+  padding: 8px;
+  border-bottom: 1px solid #ddd;
+  text-align: center;
+}
+
+.p-datatable th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.p-datatable tbody tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.p-datatable tbody tr:hover {
+  background-color: #ddd;
+}

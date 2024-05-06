@@ -1,0 +1,15 @@
+<div class="container">
+    <h2>Olá, {{ nome }}</h2>
+    <p>
+        <span (click)="mostrarSaldo()">
+            Saldo:
+            <i class="pi pi-eye" *ngIf="saldoOculto"></i>
+            <span *ngIf="!saldoOculto">{{ saldo | currency }}</span>
+        </span>
+    </p>
+    <div class="button-container">
+        <button pButton type="button" label="Ver Movimentações" icon="pi pi-arrow-right" (click)="buscarMovimentacoes()"></button>
+        <button pButton type="button" label="Buscar Extrato por Período" icon="pi pi-arrow-right" (click)="buscarExtrato()"></button>
+        <button pButton type="button" label="Movimentar Conta" icon="pi pi-arrow-right" (click)="movimentarConta()"></button>
+    </div>
+</div>
