@@ -6,5 +6,6 @@ namespace Bancario.Domain.Interfaces
     {
         Task<List<MovimentacaoFinanceira>> ObterExtratoPorPeriodo(int idConta, DateTime dataInicio, DateTime dataFim);
         Task<List<MovimentacaoFinanceira>> ObterExtratoPorConta(int idConta);
+        Task<bool> InativarConta(int idConta);
     }
 }

@@ -33,6 +33,12 @@ namespace Bancario.Application.Services
         {
             var listConta = await _contaRepository.GetAll();
             return _mapper.Map<IEnumerable<ContaBancaria>, IEnumerable<ContaBancariaDto>>(listConta);
+        }        
+        
+        public async Task<ContaBancariaDto> ObterSaldoClientePorCpf(string cpf)
+        {
+            var conta = await _contaRepository.GetById(c => c.CPF == cpf);
+            return _mapper.Map<ContaBancaria, ContaBancariaDto>(conta);
         }
 
         public async Task<bool> AtualizarContas(List<ContaBancariaDto> listContaDto)
@@ -46,6 +52,11 @@ namespace Bancario.Application.Services
             }
 
             return result;
+        }        
+        
+        public async Task<bool> InativaConta(int conta)
+        {
+            return await _contaRepository.InativarConta(conta);
         }
 
         public async Task<IEnumerable<MovimentacaoFinanceiraDto>> ObterExtratoPorPeriodo(int idConta, DateTime dataInicio, DateTime dataFim)

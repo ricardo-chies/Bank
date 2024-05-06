@@ -11,5 +11,7 @@ namespace Bancario.Application.Interfaces
         Task<IEnumerable<MovimentacaoFinanceiraDto>> ObterExtratoPorPeriodo(int conta, DateTime dataInicio, DateTime dataFim);
         Task<IEnumerable<MovimentacaoFinanceiraDto>> ObterExtratoPorConta(int conta);
         Task<IEnumerable<ContaBancariaDto>> ObterSaldoClientes();
+        Task<ContaBancariaDto> ObterSaldoClientePorCpf(string cpf);
+        Task<bool> InativaConta(int conta);
     }
 }

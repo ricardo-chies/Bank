@@ -42,5 +42,25 @@ namespace Bancario.Infrastructure.Repositories
             return movimentacoes;
         }
 
+        public async Task<bool> InativarConta(int idConta)
+        {
+            try
+            {
+                var sql =
+                    @"
+                       UPDATE CONTA_BANCARIA
+                        SET Status = 'I'
+                       WHERE IdConta = {0}
+                    ";
+
+                await _context.Database.ExecuteSqlRawAsync(sql, idConta);
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

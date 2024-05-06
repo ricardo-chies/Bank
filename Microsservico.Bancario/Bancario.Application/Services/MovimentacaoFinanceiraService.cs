@@ -25,7 +25,7 @@ namespace Bancario.Application.Services
 
             if (contaOrigemDto.Saldo < movimentacaoDto.Valor)
             {
-                throw new InvalidOperationException("Não autorizado.");
+                return false;
             }
 
             ContaBancariaDto contaDestinoDto = await _contaService.ObterContaPorId(movimentacaoDto.ContaDestino);

@@ -35,6 +35,14 @@ namespace Bancario.API.Controllers
             return Ok(resultado);
         }
 
+        [HttpGet("saldos/{cpf}")]
+        [ProducesResponseType(typeof(ContaBancariaDto), StatusCodes.Status200OK)]
+        public async Task<IActionResult> ObterSaldoClientePorCpf([FromRoute] string cpf)
+        {
+            var resultado = await _contaService.ObterSaldoClientePorCpf(cpf);
+            return Ok(resultado);
+        }
+
         [HttpGet("extrato/{conta}/{dataInicio}/{dataFim}")]
         [ProducesResponseType(typeof(ContaBancariaDto), StatusCodes.Status200OK)]
         public async Task<IActionResult> ObterExtratoPorPeriodo([FromRoute] int conta, DateTime dataInicio, DateTime dataFim)
@@ -85,9 +93,9 @@ namespace Bancario.API.Controllers
 
         [HttpPut("inativa")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
-        public async Task<IActionResult> InativarContaBancaria([FromBody] List<ContaBancariaDto> contaDto)
+        public async Task<IActionResult> InativarContaBancaria([FromQuery] int conta)
         {
-            var resultado = await _contaService.AtualizarContas(contaDto);
+            var resultado = await _contaService.InativaConta(conta);
             return Ok(resultado);
         }
     }
