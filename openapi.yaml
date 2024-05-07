@@ -1,0 +1,304 @@
+openapi: 3.0.1
+info:
+  title: Bancario
+  description: Este microsserviço tem como objetivo disponibilizar endpoints relacionados a acesso, análise e movimentação bancária.
+  contact:
+    name: Ricardo Chies
+    url: https://www.linkedin.com/in/ricardo-chies-087557216/
+    email: chies.dev@gmail.com
+  version: v1
+paths:
+  /api/v1.0/contas/{conta}:
+    get:
+      tags:
+        - ContasBancarias
+      parameters:
+        - name: conta
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContaBancariaDto'
+    delete:
+      tags:
+        - ContasBancarias
+      parameters:
+        - name: conta
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /api/v1.0/contas/saldos:
+    get:
+      tags:
+        - ContasBancarias
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ContaBancariaDto'
+  /api/v1.0/contas/saldos/{cpf}:
+    get:
+      tags:
+        - ContasBancarias
+      parameters:
+        - name: cpf
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContaBancariaDto'
+  /api/v1.0/contas/extrato/{conta}/{dataInicio}/{dataFim}:
+    get:
+      tags:
+        - ContasBancarias
+      parameters:
+        - name: conta
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+        - name: dataInicio
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: dataFim
+          in: path
+          required: true
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContaBancariaDto'
+  /api/v1.0/contas/extrato/{conta}:
+    get:
+      tags:
+        - ContasBancarias
+      parameters:
+        - name: conta
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ContaBancariaDto'
+  /api/v1.0/contas:
+    post:
+      tags:
+        - ContasBancarias
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ContaBancariaDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /api/v1.0/contas/movimentacoes:
+    post:
+      tags:
+        - ContasBancarias
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MovimentacaoFinanceiraDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /api/v1.0/contas/{conta}/movimentacoes:
+    get:
+      tags:
+        - ContasBancarias
+      parameters:
+        - name: conta
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/MovimentacaoFinanceiraDto'
+  /api/v1.0/contas/inativa:
+    put:
+      tags:
+        - ContasBancarias
+      parameters:
+        - name: conta
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /api/v1.0/usuarios:
+    post:
+      tags:
+        - Usuarios
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UsuarioDto'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: boolean
+  /api/v1.0/usuarios/{cpf}:
+    get:
+      tags:
+        - Usuarios
+      parameters:
+        - name: cpf
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioDto'
+  /api/v1.0/usuarios/login:
+    get:
+      tags:
+        - Usuarios
+      parameters:
+        - name: cpf
+          in: query
+          schema:
+            type: string
+        - name: senha
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UsuarioDto'
+components:
+  schemas:
+    ContaBancariaDto:
+      type: object
+      properties:
+        conta:
+          type: integer
+          format: int32
+        cpf:
+          type: string
+          nullable: true
+        saldo:
+          type: number
+          format: double
+        status:
+          type: string
+          nullable: true
+      additionalProperties: false
+    MovimentacaoFinanceiraDto:
+      type: object
+      properties:
+        codigoMovimentacao:
+          type: integer
+          format: int32
+        contaOrigem:
+          type: integer
+          format: int32
+        contaDestino:
+          type: integer
+          format: int32
+        valor:
+          type: number
+          format: double
+        dataMovimentacao:
+          type: string
+          format: date-time
+        descricao:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UsuarioDto:
+      type: object
+      properties:
+        cpf:
+          type: string
+          nullable: true
+        nome:
+          type: string
+          nullable: true
+        email:
+          type: string
+          nullable: true
+        senha:
+          type: string
+          nullable: true
+        codigoTipoUsuario:
+          type: integer
+          format: int32
+      additionalProperties: false
