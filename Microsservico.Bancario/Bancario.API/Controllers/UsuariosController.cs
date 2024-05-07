@@ -32,7 +32,7 @@ namespace Bancario.API.Controllers
             } 
             catch (Exception ex)
             {
-                _logger.LogInformation("[CriarUsuario] Não foi possível criar o usuário: {usuario.Cpf} - Exception Message: {ex}", usuario.Cpf, ex);
+                _logger.LogError("[CriarUsuario] Não foi possível criar o usuário: {usuario.Cpf} - Exception Message: {ex}", usuario.Cpf, ex);
                 return StatusCode(500, new ErrorDto("Não foi possível criar o usuário", ex.Message, ex.StackTrace ?? ""));
             }
 
@@ -50,7 +50,7 @@ namespace Bancario.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogInformation("[ObterUsuarioPorCpf] Não foi possível localizar o usuário: {cpf} - Exception Message: {ex}", cpf, ex);
+                _logger.LogError("[ObterUsuarioPorCpf] Não foi possível localizar o usuário: {cpf} - Exception Message: {ex}", cpf, ex);
                 return StatusCode(500, new ErrorDto("Não foi possível localizar o usuário", ex.Message, ex.StackTrace ?? ""));
             }
 
@@ -68,7 +68,7 @@ namespace Bancario.API.Controllers
             }
             catch (Exception ex)
             {
-                _logger.LogInformation("[LoginUsuario] Não foi possível realizar o login de usuário: {cpf} - Exception Message: {ex}", cpf, ex);
+                _logger.LogError("[LoginUsuario] Não foi possível realizar o login de usuário: {cpf} - Exception Message: {ex}", cpf, ex);
                 return StatusCode(500, new ErrorDto("Não foi possível realizar o login de usuário", ex.Message, ex.StackTrace ?? ""));
             }
 
