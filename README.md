@@ -1,27 +1,36 @@
-# BancarioApp
+# BANCARIO APP ANGULAR
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.3.6.
+# Descrição
+Este projeto consiste na criação de uma aplicação web utilizando angular com template free do PrimeNG.<br>
 
-## Development server
+# Funcionalidades
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Login:
+<ul>
+  <li>Acesso diferenciado para cliente e gerente.</li>
+</ul>
 
-## Code scaffolding
+Dashboard do Cliente: 
+<ul>
+  <li>Visualização de saldo atual.</li>
+  <li>Visualização de extrato por período.</li>
+  <li>Realização de movimentações financeiras.</li>
+</ul>
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Dashboard do Gerente:
+<ul>
+  <li>Visualização de todos os clientes e seus saldos.</li>
+  <li>Realização de movimentações nas contas dos clientes.</li>
+  <li>Visualização de extratos das contas dos clientes.</li>
+  <li>Criação e encerramento de contas bancárias.</li>
+  <li>Gerenciamento de contas</li>
+</ul>
 
-## Build
+# Autor
+José Ricardo Chies Gonçalves
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+LinkedIn:
+https://www.linkedin.com/in/ricardo-chies-087557216/
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+E-mail:
+chies.dev@gmail.com
